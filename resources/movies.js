@@ -21,5 +21,10 @@ if (Number.isNaN(id)) {
         res.status(404).json({ error: 'movie not found' });
         return;
     }
-    res.json(movie);
+
+    const [reviewResults] = await connection.query(' select * from reviews where movie_id = ?', [id]);
+
+
+
+    res.json({...movie, reviews: reviewResults});
 });
