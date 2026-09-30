@@ -27,15 +27,33 @@ if (Number.isNaN(id)) {
     return;
 } 
 
-    const [[movie]] = await connection.query('select * from movies where id = ?', [id]);
-    if (movie === undefined) {
+let movie , reviewResults;
+
+try{    
+[[movie]] = await connection.query('select * from movies where id = ?', [id]);
+}   
+
+catch (err) {
+    console.error(' queryin movies detail failed' , err);
+    res.status(500).json ({error: 'queryin movies detail failed'});
+    
+    return;
+}
+
+if (movie === undefined) {
         res.status(404).json({ error: 'movie not found' });
         return;
     }
+try{
+[reviewResults] = await connection.query(' select * from reviews where movie_id = ?', [id]);
+}
 
-    const [reviewResults] = await connection.query(' select * from reviews where movie_id = ?', [id]);
+catch (err) {
+    console.error(' queryin movies review failed' , err);
+    res.status(500).json ({error: 'queryin movies review failed'});
+    
+    return;
+}
 
-
-
-    res.json({...movie, reviews: reviewResults});
+res.json({...movie, reviews: reviewResults});
 });
