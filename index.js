@@ -7,7 +7,9 @@ import { moviesRouter } from './resources/movies.js';
 const app = express();
 const port = env.SERVE_PORT;
 
-app.use('/movies' , moviesRouter)
+
+app.use(express.static('public'));
+app.use('/movies' , moviesRouter);
 
 app.listen(port, () => {
   console.log(`Movies app listening on port ${port}`);
