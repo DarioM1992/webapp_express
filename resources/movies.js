@@ -4,7 +4,8 @@ import { connection } from '../db.js';
 export const moviesRouter = express.Router();
 
 moviesRouter.get('/', async (req,res) => {
-    const [results] = await connection.query('select * from movies');
+    const sql = 'select movies.*, round(avg(reviews.vote)) avarage_review from movies left join reviews on reviews.movie_id = movies.id group by movies.id'
+    const [results] = await connection.query(sql);
     res.json(results);
 });
 
