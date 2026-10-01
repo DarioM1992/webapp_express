@@ -7,6 +7,7 @@
     "dev": "node --env-file=.env.local --watch ."
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "mysql2": "^3.24.4"
   }

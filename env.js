@@ -4,7 +4,8 @@ const {
     DB_PORT,
     DB_USER,
     DB_PASSWORD,
-    DB_NAME
+    DB_NAME,
+    FE_ORIGIN
 } = process.env;
 
 const quit = message => {
@@ -23,7 +24,7 @@ if (Number.isNaN(servePort)){
     quit('variable SERVE_PORT missing');
 }
 
-// DB_HOST
+// DB_HOST  
 if (!DB_HOST || DB_HOST === '') {
      quit(" invalid variable DB_HOST");
 }
@@ -54,11 +55,17 @@ if (!DB_NAME || DB_NAME === '') {
      quit(" invalid variable DB_HOST");
 }
 
+// FE_ORIGIN
+if (FE_ORIGIN === null || FE_ORIGIN === undefined) {
+    quit(' variable FE_ORIGIN  missing');
+}
+
 export const env = { 
     SERVE_PORT: servePort,
     DB_HOST ,
     DB_PORT: dbPort,
     DB_USER,
     DB_PASSWORD,
-    DB_NAME
+    DB_NAME,
+    FE_ORIGIN
 };
